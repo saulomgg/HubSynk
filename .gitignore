@@ -1,0 +1,33 @@
+# ── Chave Privada — CRÍTICO, NUNCA commitar ──
+private_key.pem
+**/private_key.pem
+devtool/private_key.pem
+
+# ── PyInstaller ──────────────────────────────
+dist/
+*.spec.bak
+__pycache__/
+*.pyc
+*.pyo
+
+# ── Inno Setup output ────────────────────────
+Output/
+
+# ── Python ───────────────────────────────────
+*.egg-info/
+.eggs/
+*.egg
+.venv/
+venv/
+env/
+
+# ── OS ───────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── IDE ──────────────────────────────────────
+.vscode/
+.idea/
+*.suo
+*.user

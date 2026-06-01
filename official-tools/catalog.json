@@ -1,0 +1,13 @@
+{
+    "version": "1.0",
+    "updated": "2026-05-31",
+    "tools": [
+        {
+            "name": "VideoConvertSynk",
+            "description": "Fast video converter tool for HubSynk.",
+            "version": "1.0.0",
+            "file": "VideoconvertSynk/vcsynk.hubsynk",
+            "author": "Saulomgg"
+        }
+    ]
+}
