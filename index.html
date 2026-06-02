@@ -1,0 +1,1188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HubSynk Wiki — Documentation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:        #0b0d11;
+    --surface:   #13161d;
+    --surface2:  #1c2028;
+    --border:    #252a35;
+    --accent:    #4f8ef7;
+    --accent2:   #7c3aed;
+    --accent3:   #10b981;
+    --warn:      #f59e0b;
+    --danger:    #ef4444;
+    --text:      #e2e8f0;
+    --muted:     #64748b;
+    --code-bg:   #0d1117;
+    --tag-blue:  rgba(79,142,247,.15);
+    --tag-green: rgba(16,185,129,.15);
+    --tag-amber: rgba(245,158,11,.15);
+    --tag-red:   rgba(239,68,68,.15);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.75;
+    display: flex;
+    min-height: 100vh;
+  }
+
+  /* ── SIDEBAR ─────────────────────────────────── */
+  nav {
+    width: 260px;
+    min-width: 260px;
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    padding: 32px 0 40px;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .nav-logo {
+    padding: 0 24px 28px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 20px;
+  }
+
+  .nav-logo .logo-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 20px;
+    color: var(--accent);
+    letter-spacing: -.5px;
+  }
+
+  .nav-logo .logo-sub {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: .5px;
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+
+  .nav-section {
+    padding: 0 24px;
+    margin-bottom: 6px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 20px;
+  }
+
+  nav a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 7px 24px;
+    text-decoration: none;
+    color: #94a3b8;
+    font-size: 13.5px;
+    transition: all .15s;
+    border-left: 2px solid transparent;
+  }
+
+  nav a:hover { color: var(--text); background: var(--surface2); }
+  nav a.active { color: var(--accent); border-left-color: var(--accent); background: var(--tag-blue); }
+
+  nav a .icon { font-size: 14px; opacity: .7; }
+
+  /* ── MAIN ────────────────────────────────────── */
+  main {
+    flex: 1;
+    max-width: 860px;
+    padding: 60px 64px;
+    overflow-x: hidden;
+  }
+
+  /* ── HEADINGS ────────────────────────────────── */
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 42px;
+    line-height: 1.1;
+    letter-spacing: -1.5px;
+    color: #fff;
+    margin-bottom: 16px;
+  }
+
+  h2 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 26px;
+    color: #fff;
+    margin: 56px 0 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+    letter-spacing: -.5px;
+    scroll-margin-top: 24px;
+  }
+
+  h3 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    font-size: 17px;
+    color: #cbd5e1;
+    margin: 32px 0 12px;
+    scroll-margin-top: 24px;
+  }
+
+  h4 {
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: .8px;
+    color: var(--muted);
+    margin: 24px 0 8px;
+  }
+
+  p { margin-bottom: 14px; color: #94a3b8; }
+  p strong { color: var(--text); font-weight: 500; }
+
+  /* ── HERO ────────────────────────────────────── */
+  .hero {
+    background: linear-gradient(135deg, #111827 0%, #1e1b4b 100%);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 40px 44px;
+    margin-bottom: 48px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 220px; height: 220px;
+    background: radial-gradient(circle, rgba(79,142,247,.18) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 99px;
+    font-weight: 500;
+  }
+  .badge-blue  { background: var(--tag-blue);  color: var(--accent);  border: 1px solid rgba(79,142,247,.25); }
+  .badge-green { background: var(--tag-green); color: var(--accent3); border: 1px solid rgba(16,185,129,.25); }
+  .badge-amber { background: var(--tag-amber); color: var(--warn);    border: 1px solid rgba(245,158,11,.25); }
+  .badge-red   { background: var(--tag-red);   color: var(--danger);  border: 1px solid rgba(239,68,68,.25); }
+
+  .hero p { color: #94a3b8; font-size: 16px; max-width: 540px; margin: 0; }
+
+  /* ── CODE ────────────────────────────────────── */
+  pre {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px 24px;
+    overflow-x: auto;
+    margin: 16px 0 20px;
+    position: relative;
+  }
+
+  pre .label {
+    position: absolute;
+    top: 10px; right: 14px;
+    font-size: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: .5px;
+  }
+
+  code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: #e2e8f0;
+  }
+
+  p code, li code {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-size: 12.5px;
+    color: #93c5fd;
+  }
+
+  /* Syntax highlight colors */
+  .kw  { color: #c084fc; }
+  .str { color: #86efac; }
+  .cm  { color: #475569; font-style: italic; }
+  .fn  { color: #7dd3fc; }
+  .num { color: #fbbf24; }
+  .key { color: #f9a8d4; }
+
+  /* ── CALLOUTS ────────────────────────────────── */
+  .callout {
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin: 20px 0;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    font-size: 14px;
+  }
+  .callout-icon { font-size: 18px; line-height: 1.5; flex-shrink: 0; }
+  .callout-body { color: #94a3b8; }
+  .callout-body strong { color: var(--text); display: block; margin-bottom: 4px; font-size: 14px; }
+
+  .callout-warn   { background: rgba(245,158,11,.08); border: 1px solid rgba(245,158,11,.25); }
+  .callout-danger { background: rgba(239,68,68,.08);  border: 1px solid rgba(239,68,68,.25);  }
+  .callout-info   { background: rgba(79,142,247,.08); border: 1px solid rgba(79,142,247,.25); }
+  .callout-ok     { background: rgba(16,185,129,.08); border: 1px solid rgba(16,185,129,.25); }
+
+  /* ── TABLES ──────────────────────────────────── */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0 24px;
+    font-size: 13.5px;
+  }
+
+  th {
+    text-align: left;
+    padding: 10px 14px;
+    background: var(--surface2);
+    color: #cbd5e1;
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+    color: #94a3b8;
+    vertical-align: top;
+  }
+
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: rgba(255,255,255,.02); }
+
+  td code { font-size: 12px; }
+
+  /* ── FILE TREE ───────────────────────────────── */
+  .tree {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px 24px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    line-height: 2;
+    color: #94a3b8;
+  }
+
+  .tree .dir  { color: var(--accent); }
+  .tree .file { color: #e2e8f0; }
+  .tree .note { color: var(--muted); font-style: italic; }
+  .tree .new  { color: var(--accent3); }
+  .tree .priv { color: var(--danger); }
+
+  /* ── FLOW DIAGRAM ────────────────────────────── */
+  .flow {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin: 20px 0;
+  }
+
+  .flow-step {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+  }
+
+  .flow-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 40px;
+  }
+
+  .flow-dot {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--surface2);
+    border: 2px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--accent);
+    flex-shrink: 0;
+  }
+
+  .flow-dot.ok     { border-color: var(--accent3); color: var(--accent3); }
+  .flow-dot.warn   { border-color: var(--warn);    color: var(--warn); }
+  .flow-dot.danger { border-color: var(--danger);  color: var(--danger); }
+
+  .flow-line {
+    width: 2px;
+    flex: 1;
+    min-height: 24px;
+    background: var(--border);
+    margin: 4px 0;
+  }
+
+  .flow-content {
+    padding: 4px 0 28px;
+    flex: 1;
+  }
+
+  .flow-content strong {
+    display: block;
+    color: var(--text);
+    font-size: 14px;
+    margin-bottom: 4px;
+  }
+
+  .flow-content p {
+    font-size: 13.5px;
+    color: #64748b;
+    margin: 0;
+  }
+
+  /* ── CARDS ───────────────────────────────────── */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 16px;
+    margin: 20px 0;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    transition: border-color .2s;
+  }
+
+  .card:hover { border-color: #334155; }
+
+  .card-icon { font-size: 22px; margin-bottom: 10px; }
+  .card-title { font-family: 'Syne', sans-serif; font-weight: 600; font-size: 14px; color: var(--text); margin-bottom: 6px; }
+  .card-desc  { font-size: 13px; color: var(--muted); line-height: 1.55; }
+
+  /* ── DIVIDER ─────────────────────────────────── */
+  hr { border: none; border-top: 1px solid var(--border); margin: 48px 0; }
+
+  /* ── LIST ────────────────────────────────────── */
+  ul, ol {
+    padding-left: 20px;
+    margin: 10px 0 16px;
+    color: #94a3b8;
+  }
+
+  li { margin-bottom: 6px; font-size: 14px; }
+  li strong { color: var(--text); }
+
+  /* ── SCROLLBAR ───────────────────────────────── */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 99px; }
+
+  /* ── VERSION TAG ─────────────────────────────── */
+  .version-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 2px 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--accent3);
+    margin-left: 10px;
+    vertical-align: middle;
+  }
+
+  .changelog-item {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 20px;
+    font-size: 14px;
+  }
+
+  .changelog-version {
+    min-width: 60px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--accent);
+    padding-top: 2px;
+  }
+
+  .changelog-content { color: #94a3b8; }
+  .changelog-content strong { color: var(--text); display: block; margin-bottom: 4px; }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════
+     SIDEBAR
+════════════════════════════════════════════════ -->
+<nav>
+  <div class="nav-logo">
+    <div class="logo-title">Devtool</div>
+    <div class="logo-sub">Wiki — Documentação</div>
+  </div>
+
+  <div class="nav-section">Introdução</div>
+  <a href="#visao-geral" class="active"><span class="icon">🏠</span> Visão Geral</a>
+  <a href="#instalacao"><span class="icon">⚙️</span> Instalação</a>
+  <a href="#estrutura"><span class="icon">📁</span> Estrutura de Arquivos</a>
+
+  <div class="nav-section">Aplicação Principal</div>
+  <a href="#hubsynk-py"><span class="icon">🚀</span> hubsynk.py</a>
+  <a href="#constants"><span class="icon">🔧</span> constants.py</a>
+  <a href="#config-manager"><span class="icon">💾</span> config_manager.py</a>
+  <a href="#tool-processor"><span class="icon">🛡️</span> tool_processor.py</a>
+  <a href="#tool-launcher"><span class="icon">▶️</span> tool_launcher.py</a>
+  <a href="#github-manager"><span class="icon">🐙</span> github_manager.py</a>
+  <a href="#ui"><span class="icon">🖼️</span> ui.py</a>
+  <a href="#utils"><span class="icon">🔨</span> utils.py</a>
+
+  <div class="nav-section">DevTools</div>
+  <a href="#stampsynk"><span class="icon">✍️</span> StampSynk (hubsign.py)</a>
+  <a href="#signer-logic"><span class="icon">🔐</span> signer_logic.py</a>
+
+  <div class="nav-section">Segurança</div>
+  <a href="#criptografia"><span class="icon">🔒</span> Sistema Criptográfico</a>
+  <a href="#formato-hubsynk"><span class="icon">📦</span> Formato .hubsynk</a>
+  <a href="#trocar-chaves"><span class="icon">🔑</span> Trocar Chaves</a>
+
+  <div class="nav-section">Download</div>
+  <a href="#download"><span class="icon">⬇️</span> Download & Install</a>
+
+  <div class="nav-section">Roadmap</div>
+  <a href="#roadmap"><span class="icon">🗺️</span> Roadmap</a>
+  <a href="#chaves-proprias"><span class="icon">🔑</span> Custom Keys</a>
+
+  <div class="nav-section">Reference</div>
+  <a href="#fluxos"><span class="icon">🔄</span> Fluxos Completos</a>
+  <a href="#changelog"><span class="icon">📋</span> Changelog</a>
+  <a href="#faq"><span class="icon">❓</span> FAQ</a>
+</nav>
+
+<!-- ═══════════════════════════════════════════════
+     MAIN CONTENT
+════════════════════════════════════════════════ -->
+<main>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-badges">
+      <span class="badge badge-blue">v1.0</span>
+      <span class="badge badge-green">Python 3.10+</span>
+      <span class="badge badge-amber">Windows / Linux</span>
+      <span class="badge badge-blue">RSA 4096-bit</span>
+      <span class="badge badge-green">MIT License</span>
+    </div>
+    <h1>HubSynk Wiki</h1>
+    <p>Complete documentation — architecture, cryptographic model, security, and developer reference.</p>
+  </div>
+
+  <!-- ═══════════════════ VISÃO GERAL ═══════════════════ -->
+  <h2 id="visao-geral">Visão Geral</h2>
+
+  <p>O <strong>HubSynk</strong> é um hub de produtividade open source para Windows que centraliza, organiza e lança ferramentas (.exe, .py, GitHub) num único lugar com interface Fluent Design. Ele também possui um sistema próprio de distribuição segura de ferramentas via pacotes <code>.hubsynk</code> assinados digitalmente.</p>
+
+  <div class="card-grid">
+    <div class="card">
+      <div class="card-icon">📦</div>
+      <div class="card-title">Gerenciamento de Ferramentas</div>
+      <div class="card-desc">Instala, organiza e remove ferramentas oficiais, customizadas e scripts Python.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">🔐</div>
+      <div class="card-title">Segurança Criptográfica</div>
+      <div class="card-desc">Pacotes .hubsynk assinados com RSA 4096 + hash SHA-256 do executável.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">🐙</div>
+      <div class="card-title">Integração GitHub</div>
+      <div class="card-desc">Baixa e executa ferramentas diretamente de repositórios e subpastas do GitHub.</div>
+    </div>
+    <div class="card">
+      <div class="card-icon">⭐</div>
+      <div class="card-title">Favoritos & Busca</div>
+      <div class="card-desc">Marque ferramentas como favoritas e filtre por nome ou descrição em tempo real.</div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════ INSTALAÇÃO ═══════════════════ -->
+  <h2 id="instalacao">Instalação</h2>
+
+  <h3>Pré-requisitos</h3>
+  <ul>
+    <li>Python 3.10 ou superior</li>
+    <li>pip (gerenciador de pacotes Python)</li>
+    <li>Tkinter (normalmente incluso no Python; no Linux: <code>sudo apt install python3-tk</code>)</li>
+  </ul>
+
+  <h3>Instalando dependências</h3>
+<pre><code><span class="cm"># Instalar as bibliotecas necessárias</span>
+pip install pillow cryptography</code><span class="label">bash</span></pre>
+
+  <h3>Executando</h3>
+<pre><code><span class="cm"># Na raiz do projeto</span>
+python hubsynk.py</code><span class="label">bash</span></pre>
+
+  <div class="callout callout-info">
+    <div class="callout-icon">💡</div>
+    <div class="callout-body">
+      <strong>Onde os dados são salvos?</strong>
+      Windows: <code>%LOCALAPPDATA%\Devtool\</code> — Linux/macOS: <code>~/.hubsynk/</code>
+    </div>
+  </div>
+
+  <!-- ═══════════════════ ESTRUTURA ═══════════════════ -->
+  <h2 id="estrutura">Estrutura de Arquivos</h2>
+
+<div class="tree">
+<span class="dir">hubsynk/</span><br>
+├── <span class="file">hubsynk.py</span>          <span class="note">← ponto de entrada, inicializa tudo</span><br>
+├── <span class="file">public_key.pem</span>      <span class="note">← chave pública (referência)</span><br>
+├── <span class="file">requirements.txt</span><br>
+├── <span class="file">LICENSE</span>             <span class="note">← MIT</span><br>
+├── <span class="file">README.md</span><br>
+│<br>
+├── <span class="dir">src/</span>                 <span class="note">← lógica principal</span><br>
+│   ├── <span class="file">constants.py</span>    <span class="note">← cores, URLs, chave pública hardcoded</span><br>
+│   ├── <span class="file">config_manager.py</span><span class="note">← persiste ferramentas em JSON</span><br>
+│   ├── <span class="file">tool_processor.py</span><span class="note">← instalação + verificação (v2.0)</span><br>
+│   ├── <span class="file">tool_launcher.py</span> <span class="note">← executa .exe / .py / pasta</span><br>
+│   ├── <span class="file">github_manager.py</span><span class="note">← download de repositórios</span><br>
+│   ├── <span class="file">ui.py</span>           <span class="note">← interface Tkinter completa</span><br>
+│   └── <span class="file">utils.py</span>        <span class="note">← cache de ícones, hashing</span><br>
+│<br>
+└── <span class="dir">devtools/</span>            <span class="note">← ferramentas para desenvolvedores</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;├── <span class="file">hubsign.py</span>      <span class="note">← GUI Devtool</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;├── <span class="priv">private_key.pem</span> <span class="note">← ⚠️ NUNCA compartilhe!</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;├── <span class="file">public_key.pem</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;├── <span class="file">README_DEV.md</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;└── <span class="dir">src/</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└── <span class="file">signer_logic.py</span> <span class="note">← lógica de assinatura (v2.0)</span><br>
+</div>
+
+  <!-- ═══════════════════ hubsynk.py ═══════════════════ -->
+  <h2 id="hubsynk-py">hubsynk.py — Ponto de Entrada</h2>
+
+  <p>Arquivo mínimo que instancia os componentes principais e inicia o loop Tkinter. É o único arquivo que precisa ser executado.</p>
+
+<pre><code><span class="kw">def</span> <span class="fn">main</span>():
+    root = tk.Tk()
+
+    config_manager  = DevtoolConfig()       <span class="cm"># gerencia JSON de configuração</span>
+    tool_processor  = ToolProcessor(config_manager)  <span class="cm"># instala + verifica</span>
+    tool_launcher   = ToolLauncher()        <span class="cm"># executa as ferramentas</span>
+
+    app = DevtoolApp(root, config_manager, tool_processor, tool_launcher)
+    root.mainloop()</code><span class="label">hubsynk.py</span></pre>
+
+  <p>O padrão aqui é <strong>injeção de dependência</strong>: cada componente recebe o que precisa pelo construtor, sem importações cruzadas ou singletons globais.</p>
+
+  <!-- ═══════════════════ constants.py ═══════════════════ -->
+  <h2 id="constants">constants.py — Configurações Globais</h2>
+
+  <p>Centraliza todas as constantes usadas pela aplicação. Funciona como o único lugar onde você precisa editar para alterar comportamentos globais.</p>
+
+  <table>
+    <tr><th>Constante</th><th>Tipo</th><th>Descrição</th></tr>
+    <tr><td><code>WIN_BG</code>, <code>WIN_FG</code></td><td>str</td><td>Cores do tema visual (Fluent Design)</td></tr>
+    <tr><td><code>WIN_ACCENT</code></td><td>str</td><td>Azul de destaque <code>#0078D7</code></td></tr>
+    <tr><td><code>APP_DATA_PATH</code></td><td>str</td><td>Caminho de dados do usuário (OS-aware)</td></tr>
+    <tr><td><code>TOOLS_DIR</code></td><td>str</td><td>Pasta onde ferramentas oficiais são instaladas</td></tr>
+    <tr><td><code>HUB_CONFIG_FILE</code></td><td>str</td><td>Caminho do <code>hub_config.json</code></td></tr>
+    <tr><td><code>PUBLIC_KEY</code></td><td>str</td><td>Chave pública RSA 4096 em formato PEM (hardcoded)</td></tr>
+    <tr><td><code>GITHUB_URL</code>, <code>SUPPORT_URL</code></td><td>str</td><td>URLs do projeto</td></tr>
+  </table>
+
+  <div class="callout callout-info">
+    <div class="callout-icon">🔑</div>
+    <div class="callout-body">
+      <strong>Por que a chave pública fica hardcoded aqui?</strong>
+      A chave pública pode ser conhecida por qualquer pessoa — ela só verifica assinaturas, nunca cria. Ao hardcodá-la no executável final, você garante que o Devtool sempre vai verificar pacotes contra a <em>sua</em> chave, sem depender de um arquivo externo que poderia ser substituído.
+    </div>
+  </div>
+
+  <!-- ═══════════════════ config_manager.py ═══════════════════ -->
+  <h2 id="config-manager">config_manager.py — Persistência</h2>
+
+  <p>A classe <code>DevtoolConfig</code> é responsável por toda a persistência de dados. Ela lê e escreve um arquivo <code>hub_config.json</code> que mantém a lista de ferramentas instaladas.</p>
+
+  <h3>Estrutura do hub_config.json</h3>
+
+<pre><code>{
+  <span class="key">"version"</span>: <span class="str">"1.0"</span>,
+  <span class="key">"tools"</span>: [
+    {
+      <span class="key">"name"</span>:        <span class="str">"Minha Ferramenta"</span>,
+      <span class="key">"exe_path"</span>:    <span class="str">"C:\\...\\minha_ferramenta.exe"</span>,
+      <span class="key">"version"</span>:     <span class="str">"1.0.0"</span>,
+      <span class="key">"description"</span>: <span class="str">"Descrição"</span>,
+      <span class="key">"is_official"</span>: <span class="kw">true</span>,
+      <span class="key">"is_favorite"</span>: <span class="kw">false</span>,
+      <span class="key">"folder_path"</span>: <span class="str">"C:\\...\\uuid-da-instalacao\\"</span>,
+      <span class="key">"added_date"</span>:  <span class="str">"2026-05-31T17:00:00"</span>
+    }
+  ]
+}</code><span class="label">hub_config.json</span></pre>
+
+  <h3>Métodos principais</h3>
+  <table>
+    <tr><th>Método</th><th>Descrição</th></tr>
+    <tr><td><code>add_tool(tool_info)</code></td><td>Adiciona ou atualiza uma ferramenta. Usa <code>exe_path</code> como ID único.</td></tr>
+    <tr><td><code>remove_tool(tool_info)</code></td><td>Remove do JSON e deleta a pasta física (somente ferramentas oficiais).</td></tr>
+    <tr><td><code>get_tools()</code></td><td>Retorna a lista completa de ferramentas.</td></tr>
+    <tr><td><code>update_favorite_status()</code></td><td>Altera o campo <code>is_favorite</code> e salva.</td></tr>
+  </table>
+
+  <div class="callout callout-warn">
+    <div class="callout-icon">⚠️</div>
+    <div class="callout-body">
+      <strong>Segurança na remoção</strong>
+      O <code>remove_tool</code> verifica que a pasta a ser deletada está dentro do <code>TOOLS_DIR</code> antes de chamar <code>shutil.rmtree</code>, evitando path traversal acidental.
+    </div>
+  </div>
+
+  <!-- ═══════════════════ tool_processor.py ═══════════════════ -->
+  <h2 id="tool-processor">tool_processor.py — Instalação e Verificação <span class="version-tag">v2.0</span></h2>
+
+  <p>O coração da segurança do Devtool. A classe <code>ToolProcessor</code> processa todos os tipos de ferramenta, com verificação criptográfica completa para pacotes oficiais.</p>
+
+  <h3>Fluxo de instalação de ferramenta oficial</h3>
+
+  <div class="flow">
+    <div class="flow-step">
+      <div class="flow-left"><div class="flow-dot">1</div><div class="flow-line"></div></div>
+      <div class="flow-content"><strong>Extrair o .hubsynk</strong><p>O ZIP é extraído em uma pasta temporária com nome UUID dentro de <code>TOOLS_DIR</code>.</p></div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-left"><div class="flow-dot">2</div><div class="flow-line"></div></div>
+      <div class="flow-content"><strong>Ler e validar tool_config.json</strong><p>Verifica existência e campos obrigatórios: <code>name</code>, <code>exe_file</code>, <code>version</code>, <code>description</code>.</p></div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-left"><div class="flow-dot ok">3</div><div class="flow-line"></div></div>
+      <div class="flow-content"><strong>Verificar assinatura RSA</strong><p>O conteúdo bruto do JSON é verificado contra <code>signature.sig</code> usando a chave pública de <code>constants.py</code>. Falha → abortado.</p></div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-left"><div class="flow-dot ok">4</div><div class="flow-line"></div></div>
+      <div class="flow-content"><strong>Verificar hash SHA-256 do .exe</strong><p><em>(novo v2.0)</em> Recalcula o SHA-256 do executável extraído e compara com <code>exe_sha256</code> do JSON assinado. Falha → abortado.</p></div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-left"><div class="flow-dot">5</div></div>
+      <div class="flow-content"><strong>Registrar no config</strong><p>Adiciona metadados ao <code>hub_config.json</code> via <code>config_manager.add_tool()</code>.</p></div>
+    </div>
+  </div>
+
+  <h3>Tipos de ferramenta suportados</h3>
+  <table>
+    <tr><th>Método</th><th>Tipo</th><th>Verificação criptográfica</th></tr>
+    <tr><td><code>process_official_tool()</code></td><td>Pacote <code>.hubsynk</code></td><td>✅ RSA + SHA-256</td></tr>
+    <tr><td><code>process_custom_tool()</code></td><td>Executável <code>.exe</code> qualquer</td><td>❌ (ferramenta do usuário)</td></tr>
+    <tr><td><code>process_python_tool()</code></td><td>Script <code>.py</code></td><td>❌ (ferramenta do usuário)</td></tr>
+  </table>
+
+  <!-- ═══════════════════ tool_launcher.py ═══════════════════ -->
+  <h2 id="tool-launcher">tool_launcher.py — Execução</h2>
+
+  <p>A classe <code>ToolLauncher</code> executa ferramentas de qualquer tipo. É inteligente o suficiente para detectar o tipo e tratar erros específicos.</p>
+
+  <h3>Lógica de execução</h3>
+
+<pre><code><span class="cm"># .exe → subprocess.Popen direto</span>
+subprocess.Popen([exe_path], cwd=os.path.dirname(exe_path))
+
+<span class="cm"># .py → python com captura de erro nos primeiros 1s</span>
+process = subprocess.Popen([sys.executable, exe_path], stderr=PIPE, ...)
+process.communicate(timeout=<span class="num">1</span>)   <span class="cm"># se travar, o script está rodando normalmente</span>
+
+<span class="cm"># pasta (GitHub) → _find_runnable() detecta o arquivo principal</span></code><span class="label">tool_launcher.py</span></pre>
+
+  <h3>Detecção de arquivo principal em pastas</h3>
+  <p>Para ferramentas baixadas do GitHub (que são pastas), o launcher procura na seguinte ordem de prioridade:</p>
+  <ol>
+    <li><code>main.py</code>, <code>app.py</code>, <code>run.py</code>, <code>index.py</code>, <code>gui.py</code></li>
+    <li>Qualquer <code>.py</code> com nome igual ao da pasta</li>
+    <li>Qualquer <code>.py</code> que não seja <code>setup.py</code> ou <code>__init__.py</code></li>
+  </ol>
+
+  <div class="callout callout-info">
+    <div class="callout-icon">🐍</div>
+    <div class="callout-body">
+      <strong>Erro Python 3.13 — audioop removido</strong>
+      Se um script Python falhar com <code>ModuleNotFoundError: No module named 'audioop'</code>, o launcher detecta e exibe uma mensagem específica orientando o usuário a instalar <code>audioop-lts</code>.
+    </div>
+  </div>
+
+  <!-- ═══════════════════ github_manager.py ═══════════════════ -->
+  <h2 id="github-manager">github_manager.py — Integração GitHub</h2>
+
+  <p>A classe <code>GitHubManager</code> permite baixar repositórios ou subpastas do GitHub diretamente pela interface.</p>
+
+  <h3>URLs suportadas</h3>
+  <table>
+    <tr><th>Formato de URL</th><th>Resultado</th></tr>
+    <tr><td><code>https://github.com/user/repo</code></td><td>Baixa o repositório inteiro</td></tr>
+    <tr><td><code>https://github.com/user/repo/tree/main/pasta</code></td><td>Baixa só a subpasta especificada</td></tr>
+  </table>
+
+  <h3>Como funciona internamente</h3>
+  <ol>
+    <li>Faz parse da URL para extrair <code>owner</code>, <code>repo</code>, <code>branch</code> e <code>subfolder</code></li>
+    <li>Baixa o ZIP do repositório via <code>https://github.com/owner/repo/archive/refs/heads/branch.zip</code></li>
+    <li>Se <code>main</code> falhar, tenta <code>master</code> automaticamente</li>
+    <li>Extrai somente os arquivos dentro do prefixo desejado</li>
+    <li>Salva em <code>APP_DATA_PATH/github_tools/nome_da_pasta/</code></li>
+  </ol>
+
+  <!-- ═══════════════════ ui.py ═══════════════════ -->
+  <h2 id="ui">ui.py — Interface Gráfica</h2>
+
+  <p>O maior arquivo do projeto. A classe <code>DevtoolApp</code> monta toda a interface Tkinter com abas, cards, busca e menus.</p>
+
+  <h3>Abas da interface</h3>
+  <table>
+    <tr><th>Aba</th><th>Filtra</th><th>Mostra</th></tr>
+    <tr><td>All Tools</td><td>Tudo (exceto Python)</td><td>Oficiais + Custom juntos</td></tr>
+    <tr><td>Official Tools</td><td><code>is_official == True</code></td><td>Apenas pacotes .hubsynk</td></tr>
+    <tr><td>My Favorite Tools</td><td><code>is_favorite == True</code></td><td>Qualquer tipo favorito</td></tr>
+    <tr><td>Python</td><td><code>is_python == True</code></td><td>Scripts .py</td></tr>
+    <tr><td>GitHub</td><td>Pasta github_tools/</td><td>Repositórios baixados</td></tr>
+  </table>
+
+  <h3>Ordenação</h3>
+  <p>Ferramentas são ordenadas por <code>added_date</code> decrescente — as mais recentes aparecem primeiro. A busca filtra por <code>name</code> e <code>description</code> em tempo real via <code>trace_add</code> no <code>StringVar</code>.</p>
+
+  <h3>Card de ferramenta</h3>
+  <p>Cada ferramenta é renderizada como um card com: nome, badge de tipo (Official/Custom), estrela de favorito, botão Launch e botão de remoção (✕).</p>
+
+  <!-- ═══════════════════ utils.py ═══════════════════ -->
+  <h2 id="utils">utils.py — Utilitários</h2>
+
+  <p>Contém dois componentes independentes:</p>
+
+  <h3>calculate_file_hash()</h3>
+  <p>Calcula o hash SHA-256 de qualquer arquivo em blocos de 4KB. Usado internamente para evitar carregar arquivos grandes na memória de uma vez.</p>
+
+  <h3>IconCache</h3>
+  <p>Cache LRU de ícones de ferramentas. Usa <code>@lru_cache</code> do Python para evitar recarregar a mesma imagem do disco repetidamente. Suporta tamanho máximo configurável (padrão: 100 ícones).</p>
+
+  <hr>
+
+  <!-- ═══════════════════ STAMPSYNK ═══════════════════ -->
+  <h2 id="stampsynk">Devtool — hubsign.py</h2>
+
+  <p>Interface gráfica (GUI) para desenvolvedores criarem, assinarem e empacotarem ferramentas no formato <code>.hubsynk</code>. Fica na pasta <code>devtools/</code> e é separado do Devtool principal.</p>
+
+  <h3>Aba 1 — Security Keys</h3>
+  <p>Gera um novo par de chaves RSA 4096-bit e salva em <code>private_key.pem</code> e <code>public_key.pem</code> na pasta <code>devtools/</code>. Use depois de gerar para atualizar <code>PUBLIC_KEY</code> em <code>constants.py</code>.</p>
+
+  <h3>Aba 2 — Build EXE (opcional)</h3>
+  <p>Chama o <code>pyinstaller --onefile --windowed</code> em um script Python. Requer <code>pip install pyinstaller</code>. O resultado vai para a pasta <code>dist/</code>.</p>
+
+  <h3>Aba 3 — Sign & Package</h3>
+  <p>Assina e empacota um executável. Campos obrigatórios:</p>
+  <table>
+    <tr><th>Campo</th><th>Descrição</th></tr>
+    <tr><td>Executable (.exe)</td><td>Caminho para o executável a empacotar</td></tr>
+    <tr><td>Private Key (.pem)</td><td>Sua chave privada RSA (padrão: <code>private_key.pem</code>)</td></tr>
+    <tr><td>Tool Name</td><td>Nome que aparecerá no Devtool</td></tr>
+    <tr><td>Version</td><td>Versão da ferramenta (ex: <code>1.0.0</code>)</td></tr>
+    <tr><td>Description</td><td>Descrição exibida no card</td></tr>
+  </table>
+
+  <!-- ═══════════════════ signer_logic.py ═══════════════════ -->
+  <h2 id="signer-logic">signer_logic.py — Lógica de Assinatura <span class="version-tag">v2.0</span></h2>
+
+  <p>Contém as duas funções principais dos DevTools.</p>
+
+  <h3>generate_keys()</h3>
+  <p>Gera um par RSA 4096-bit. Retorna os bytes PEM da chave privada (PKCS8, sem criptografia) e da chave pública (SubjectPublicKeyInfo).</p>
+
+  <h3>sign_and_package_tool()</h3>
+
+<pre><code><span class="kw">def</span> <span class="fn">sign_and_package_tool</span>(exe_path, private_key_path, name, version, description):
+    <span class="cm"># 1. Calcula SHA-256 do .exe</span>
+    exe_hash = _sha256_file(exe_path)
+
+    <span class="cm"># 2. Monta tool_config.json com o hash incluído</span>
+    tool_config_data = {
+        <span class="str">"name"</span>: name,
+        <span class="str">"exe_file"</span>: os.path.basename(exe_path),
+        <span class="str">"exe_sha256"</span>: exe_hash,   <span class="cm"># ← garante integridade do binário</span>
+        <span class="str">"version"</span>: version,
+        <span class="str">"description"</span>: description,
+        <span class="str">"signature_file"</span>: <span class="str">"signature.sig"</span>
+    }
+
+    <span class="cm"># Serialização canônica: sort_keys=True garante mesmo resultado em qualquer OS</span>
+    config_bytes = json.dumps(tool_config_data, indent=<span class="num">4</span>, sort_keys=<span class="kw">True</span>).encode(<span class="str">"utf-8"</span>)
+
+    <span class="cm"># 3. Assina o JSON com RSA-PSS + SHA-256</span>
+    signature = private_key.sign(
+        config_bytes,
+        padding.PSS(mgf=padding.MGF1(hashes.SHA256()), salt_length=padding.PSS.MAX_LENGTH),
+        hashes.SHA256()
+    )
+
+    <span class="cm"># 4. Empacota em .hubsynk (ZIP)</span>
+    <span class="kw">with</span> zipfile.ZipFile(output_zip, <span class="str">"w"</span>, zipfile.ZIP_DEFLATED) <span class="kw">as</span> zf:
+        zf.write(exe_path, main_exe_name)
+        zf.writestr(<span class="str">"tool_config.json"</span>, config_bytes)
+        zf.writestr(<span class="str">"signature.sig"</span>, signature)</code><span class="label">signer_logic.py</span></pre>
+
+  <hr>
+
+  <!-- ═══════════════════ CRIPTOGRAFIA ═══════════════════ -->
+  <h2 id="criptografia">Sistema Criptográfico</h2>
+
+  <h3>Algoritmo e parâmetros</h3>
+  <table>
+    <tr><th>Componente</th><th>Valor</th><th>Motivo</th></tr>
+    <tr><td>Algoritmo de assinatura</td><td>RSA-PSS</td><td>Mais seguro que PKCS#1 v1.5; resistente a ataques de falsificação</td></tr>
+    <tr><td>Tamanho da chave</td><td>4096 bits</td><td>Margem de segurança longa (padrão até ~2040+)</td></tr>
+    <tr><td>Hash da assinatura</td><td>SHA-256</td><td>Padrão seguro e amplamente validado</td></tr>
+    <tr><td>MGF (Mask Generation Function)</td><td>MGF1 + SHA-256</td><td>Recomendado pelo padrão PSS</td></tr>
+    <tr><td>Salt length</td><td>MAX_LENGTH</td><td>Máxima aleatoriedade por assinatura</td></tr>
+    <tr><td>Hash do executável</td><td>SHA-256</td><td>Detecta qualquer modificação no binário</td></tr>
+  </table>
+
+  <h3>O que cada chave pode e não pode fazer</h3>
+  <table>
+    <tr><th>Ação</th><th>Chave Privada</th><th>Chave Pública</th></tr>
+    <tr><td>Criar assinatura válida</td><td>✅</td><td>❌</td></tr>
+    <tr><td>Verificar uma assinatura</td><td>✅</td><td>✅</td></tr>
+    <tr><td>Ser derivada da outra</td><td>Pública ← sim</td><td>Privada ← impossível</td></tr>
+    <tr><td>Pode ser pública/compartilhada</td><td>❌ Nunca</td><td>✅ Sim</td></tr>
+  </table>
+
+  <div class="callout callout-ok">
+    <div class="callout-icon">✅</div>
+    <div class="callout-body">
+      <strong>A chave pública em constants.py é segura</strong>
+      Expor a chave pública é o comportamento correto e esperado de um sistema de assinatura digital. Ela só verifica — nunca cria. Sem a <code>private_key.pem</code>, ninguém consegue forjar um pacote válido.
+    </div>
+  </div>
+
+  <!-- ═══════════════════ FORMATO .hubsynk ═══════════════════ -->
+  <h2 id="formato-hubsynk">Formato .hubsynk</h2>
+
+  <p>Um arquivo <code>.hubsynk</code> é um <strong>ZIP renomeado</strong> com conteúdo padronizado. Pode ser aberto por qualquer gerenciador de ZIP.</p>
+
+  <h3>Conteúdo interno</h3>
+  <div class="tree">
+  <span class="dir">minha_ferramenta.hubsynk</span> (ZIP)<br>
+  ├── <span class="file">minha_ferramenta.exe</span>  <span class="note">← o executável</span><br>
+  ├── <span class="file">tool_config.json</span>       <span class="note">← metadados + hash do exe</span><br>
+  ├── <span class="file">signature.sig</span>          <span class="note">← assinatura RSA binária</span><br>
+  └── <span class="file">icon.ico</span>               <span class="note">← (opcional) ícone da ferramenta</span><br>
+  </div>
+
+  <h3>Estrutura do tool_config.json (v2.0)</h3>
+<pre><code>{
+    <span class="key">"description"</span>:  <span class="str">"Descrição da ferramenta"</span>,
+    <span class="key">"exe_file"</span>:     <span class="str">"minha_ferramenta.exe"</span>,
+    <span class="key">"exe_sha256"</span>:   <span class="str">"a3f8c2...hash SHA-256 do exe..."</span>,
+    <span class="key">"icon_file"</span>:    <span class="str">"icon.ico"</span>,
+    <span class="key">"name"</span>:         <span class="str">"Minha Ferramenta"</span>,
+    <span class="key">"signature_file"</span>: <span class="str">"signature.sig"</span>,
+    <span class="key">"version"</span>:      <span class="str">"1.0.0"</span>
+}</code><span class="label">tool_config.json</span></pre>
+
+  <div class="callout callout-info">
+    <div class="callout-icon">📌</div>
+    <div class="callout-body">
+      <strong>Por que sort_keys=True na serialização?</strong>
+      JSON não garante ordem das chaves. Ao usar <code>sort_keys=True</code>, o mesmo dicionário sempre gera os mesmos bytes em qualquer Python/OS, tornando a assinatura reproduzível e verificável de forma confiável.
+    </div>
+  </div>
+
+  <!-- ═══════════════════ TROCAR CHAVES ═══════════════════ -->
+  <h2 id="trocar-chaves">Trocar o Par de Chaves</h2>
+
+  <p>Necessário se a chave privada for comprometida ou se você quiser iniciar um novo ciclo de confiança.</p>
+
+  <h3>Passo a passo</h3>
+
+  <div class="flow">
+    <div class="flow-step">
+      <div class="flow-left"><div class="flow-dot">1</div><div class="flow-line"></div></div>
+      <div class="flow-content"><strong>Gerar novas chaves</strong><p>Abra <code>devtools/hubsign.py</code> → aba "Security Keys" → "Generate New Key Pair". Salva automaticamente <code>private_key.pem</code> e <code>public_key.pem</code>.</p></div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-left"><div class="flow-dot">2</div><div class="flow-line"></div></div>
+      <div class="flow-content"><strong>Atualizar constants.py</strong><p>Abra <code>public_key.pem</code>, copie o conteúdo e substitua o valor de <code>PUBLIC_KEY</code> em <code>src/constants.py</code>.</p></div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-left"><div class="flow-dot warn">3</div><div class="flow-line"></div></div>
+      <div class="flow-content"><strong>Reasinar todos os pacotes</strong><p>Pacotes assinados com a chave antiga vão falhar na verificação. Use o Devtool para reasinar cada <code>.hubsynk</code> com a nova chave privada.</p></div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-left"><div class="flow-dot">4</div></div>
+      <div class="flow-content"><strong>Distribuir o Devtool atualizado</strong><p>Compile e distribua o executável com o <code>constants.py</code> novo. Usuários com a versão antiga não conseguirão verificar os novos pacotes.</p></div>
+    </div>
+  </div>
+
+  <div class="callout callout-danger">
+    <div class="callout-icon">🚨</div>
+    <div class="callout-body">
+      <strong>Nunca suba private_key.pem para o GitHub!</strong>
+      Adicione ao <code>.gitignore</code>: <code>devtools/private_key.pem</code>. Se já foi commitada, a chave está comprometida e você deve gerar um novo par imediatamente.
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ═══════════════════ FLUXOS ═══════════════════ -->
+  <h2 id="fluxos">Fluxos Completos</h2>
+
+  <h3>Fluxo: Criar e distribuir uma ferramenta</h3>
+
+<pre><code><span class="cm"># 1. Escrever sua ferramenta em Python</span>
+python minha_ferramenta.py   <span class="cm"># testar localmente</span>
+
+<span class="cm"># 2. Compilar para .exe (aba Build EXE do Devtool, ou manual)</span>
+pyinstaller --onefile --windowed minha_ferramenta.py
+<span class="cm"># → dist/minha_ferramenta.exe</span>
+
+<span class="cm"># 3. Abrir Devtool</span>
+python devtools/hubsign.py
+
+<span class="cm"># 4. Na aba "Sign & Package":</span>
+<span class="cm">#    - Selecionar dist/minha_ferramenta.exe</span>
+<span class="cm">#    - Chave privada: devtools/private_key.pem</span>
+<span class="cm">#    - Preencher nome, versão, descrição</span>
+<span class="cm">#    - Clicar "SIGN & PACKAGE"</span>
+<span class="cm"># → dist/minha_ferramenta.hubsynk</span>
+
+<span class="cm"># 5. Distribuir o .hubsynk para os usuários</span></code><span class="label">workflow completo</span></pre>
+
+  <h3>Fluxo: Instalar uma ferramenta</h3>
+
+<pre><code><span class="cm"># 1. Abrir Devtool</span>
+python hubsynk.py
+
+<span class="cm"># 2. Clicar "➕ Add Official Tool"</span>
+<span class="cm"># 3. Selecionar o .hubsynk recebido</span>
+<span class="cm"># 4. HubSynk verifica automaticamente:</span>
+<span class="cm">#    ✓ Assinatura RSA do tool_config.json</span>
+<span class="cm">#    ✓ Hash SHA-256 do executável</span>
+<span class="cm"># 5. Ferramenta aparece na aba "Official Tools"</span></code><span class="label">instalação</span></pre>
+
+  <!-- ═══════════════════ CHANGELOG ═══════════════════ -->
+  <h2 id="changelog">Changelog</h2>
+
+  <div class="changelog-item">
+    <div class="changelog-version">v1.0</div>
+    <div class="changelog-content">
+      <strong>Initial Release</strong>
+      Python Hub integrado, verificação RSA-PSS 4096 + hash SHA-256 do executável, GUI Tkinter, integração GitHub, suporte a .exe/.py/pastas, StampSynk DevTools, serialização canônica <code>sort_keys=True</code>.
+    </div>
+  </div>
+
+
+  <!-- ═══════════════════ DOWNLOAD ═══════════════════ -->
+  <h2 id="download">Download &amp; Install</h2>
+
+  <p>The easiest way to get HubSynk is via the official installer available on GitHub Releases.</p>
+
+  <div class="callout callout-ok">
+    <div class="callout-icon">⬇️</div>
+    <div class="callout-body">
+      <strong>Latest Release: v1.0</strong>
+      <a href="https://github.com/saulomgg/HubSynk/releases/latest" style="color:var(--accent3);">
+        Download HubSynk_Setup_v1.0 → github.com/saulomgg/HubSynk/releases
+      </a>
+    </div>
+  </div>
+
+  <h3>Option 1 — Installer (recommended)</h3>
+  <ol>
+    <li>Download <code>HubSynk_Setup_v1.0.zip</code> from the <a href="https://github.com/saulomgg/HubSynk/releases/latest" style="color:var(--accent);">Releases page</a></li>
+    <li>Extract and run the installer</li>
+    <li>Follow the setup wizard</li>
+    <li>HubSynk will be available in the Start Menu and optionally on the Desktop</li>
+  </ol>
+
+  <h3>Option 2 — Run from source</h3>
+<pre><code><span class="cm"># Clone the repository</span>
+git clone https://github.com/saulomgg/HubSynk.git
+<span class="cm">cd HubSynk</span>
+
+<span class="cm"># Install dependencies</span>
+pip install -r requirements.txt
+
+<span class="cm"># Run</span>
+python hubsynk.py</code><span class="label">bash</span></pre>
+
+  <div class="callout callout-info">
+    <div class="callout-icon">💡</div>
+    <div class="callout-body">
+      <strong>Requirements</strong>
+      Windows 10 or later · Python 3.10+ · pip
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ═══════════════════ ROADMAP ═══════════════════ -->
+  <h2 id="roadmap">🗺️ Roadmap</h2>
+
+  <p>Planned features for upcoming versions. Have a suggestion? <a href="https://github.com/saulomgg/HubSynk/issues" style="color:var(--accent);">Open an Issue</a>.</p>
+
+  <h3>v1.1 — Quality of Life</h3>
+  <table>
+    <tr><th>Feature</th><th>Description</th></tr>
+    <tr><td>Auto dependency installer</td><td>Detect and install missing Python libraries automatically when launching a tool</td></tr>
+    <tr><td>Tool descriptions on cards</td><td>Show version and description directly on the tool card</td></tr>
+    <tr><td>Sort &amp; filter options</td><td>Sort tools by name, date added, or type</td></tr>
+    <tr><td>Dark / Light theme</td><td>Toggle between dark and light interface</td></tr>
+    <tr><td>Drag and drop</td><td>Drag <code>.exe</code>, <code>.py</code> or <code>.hubsynk</code> files directly into the interface</td></tr>
+  </table>
+
+  <h3>v1.5 — GitHub &amp; Catalog</h3>
+  <table>
+    <tr><th>Feature</th><th>Description</th></tr>
+    <tr><td>Online catalog</td><td>HubSynk reads <code>catalog.json</code> from GitHub and shows available tools to install</td></tr>
+    <tr><td>One-click install from catalog</td><td>Browse and install official tools directly from the interface</td></tr>
+    <tr><td>GitHub auto-install dependencies</td><td>Read <code>requirements.txt</code> from downloaded repos and install automatically</td></tr>
+    <tr><td>Tool update detection</td><td>Detect when an installed tool has a newer version available</td></tr>
+  </table>
+
+  <h3>v2.0 — Major Update</h3>
+  <table>
+    <tr><th>Feature</th><th>Description</th></tr>
+    <tr><td>Auto-updater</td><td>HubSynk checks for new versions on startup and updates itself</td></tr>
+    <tr><td>Modern UI rewrite</td><td>Migrate from Tkinter to CustomTkinter or PyQt6</td></tr>
+    <tr><td>Portable mode</td><td>Run without installing — USB-friendly</td></tr>
+    <tr><td>Tool categories &amp; tags</td><td>Organize tools by category (Video, Audio, Productivity, etc.)</td></tr>
+    <tr><td>Multi-key support</td><td>Support multiple trusted developers (multiple public keys)</td></tr>
+  </table>
+
+  <hr>
+
+  <!-- ═══════════════════ CHAVES PRÓPRIAS ═══════════════════ -->
+  <h2 id="chaves-proprias">Using Your Own Keys</h2>
+
+  <p>The repository ships with the official developer keys. If you want to create your own ecosystem of signed tools, follow these steps.</p>
+
+  <div class="callout callout-warn">
+    <div class="callout-icon">⚠️</div>
+    <div class="callout-body">
+      <strong>private_key.pem is not included in the repository</strong>
+      For security reasons, the private key is never distributed publicly. It lives only on the developer's machine. If you cloned the repo and want to sign your own tools, follow the steps below.
+    </div>
+  </div>
+
+  <h3>Step 1 — Generate a new key pair</h3>
+<pre><code>cd devtool
+python hubsign.py</code><span class="label">bash</span></pre>
+
+  <p>Go to the <strong>"Security Keys"</strong> tab → <strong>"Generate New Key Pair"</strong>. Two files will be created:</p>
+
+  <table>
+    <tr><th>File</th><th>Purpose</th><th>Safe to share?</th></tr>
+    <tr><td><code>private_key.pem</code></td><td>Sign packages</td><td>❌ Never — keep only on your machine</td></tr>
+    <tr><td><code>public_key.pem</code></td><td>Verify signatures</td><td>✅ Yes — can be made public</td></tr>
+  </table>
+
+  <h3>Step 2 — Update constants.py</h3>
+<pre><code>PUBLIC_KEY = <span class="str">"""-----BEGIN PUBLIC KEY-----
+PASTE_YOUR_NEW_public_key.pem_CONTENT_HERE
+-----END PUBLIC KEY-----"""</span></code><span class="label">src/constants.py</span></pre>
+
+  <h3>Step 3 — Recompile</h3>
+<pre><code>pyinstaller build/hubsynk.spec</code><span class="label">bash</span></pre>
+
+  <div class="callout callout-danger">
+    <div class="callout-icon">🚨</div>
+    <div class="callout-body">
+      <strong>If private_key.pem leaks</strong>
+      Anyone with it can forge official packages. Generate a new pair immediately, update <code>constants.py</code>, recompile, and re-sign all existing packages.
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- ═══════════════════ FAQ ═══════════════════ -->
+  <h2 id="faq">FAQ</h2>
+
+  <h3>Posso distribuir ferramentas sem assinar?</h3>
+  <p>Sim — como ferramentas "Custom" (não oficiais). O usuário seleciona diretamente o <code>.exe</code> via "Add Custom Tool". Não passa por verificação criptográfica e não aparece como "Official" na interface.</p>
+
+  <h3>O que acontece se a biblioteca cryptography não estiver instalada?</h3>
+  <p>O <code>tool_processor.py</code> detecta a ausência via <code>CRYPTOGRAPHY_AVAILABLE = False</code> e exibe um aviso, mas permite a instalação mesmo assim (degradação graciosa). Para produção, <code>cryptography</code> deve estar sempre presente.</p>
+
+  <h3>Posso ter múltiplas chaves (para múltiplos desenvolvedores)?</h3>
+  <p>Na arquitetura atual, o <code>constants.py</code> suporta apenas uma chave pública. Para múltiplos desenvolvedores, seria necessário alterar <code>_verify_signature</code> para iterar sobre uma lista de chaves públicas autorizadas.</p>
+
+  <h3>O .hubsynk pode conter múltiplos arquivos além do .exe?</h3>
+  <p>Sim — o ZIP pode ter qualquer quantidade de arquivos de suporte. Apenas o <code>exe_file</code> referenciado no <code>tool_config.json</code> precisa ter seu hash protegido. Arquivos adicionais não são verificados individualmente.</p>
+
+  <h3>Posso rodar o HubSynk no Linux/macOS?</h3>
+  <p>O código é multiplataforma em sua maior parte. O caminho de dados é detectado pelo OS (<code>LOCALAPPDATA</code> no Windows, <code>~/.hubsynk</code> no Unix). A execução de <code>.exe</code> não funciona no Linux/macOS nativamente, mas scripts <code>.py</code> e ferramentas do GitHub funcionam normalmente.</p>
+
+</main>
+
+<script>
+  // Highlight active nav link on scroll
+  const sections = document.querySelectorAll('h2[id], h3[id]');
+  const navLinks = document.querySelectorAll('nav a');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(a => a.classList.remove('active'));
+        const active = document.querySelector(`nav a[href="#${entry.target.id}"]`);
+        if (active) active.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+
+  sections.forEach(s => observer.observe(s));
+</script>
+
+</body>
+</html>
