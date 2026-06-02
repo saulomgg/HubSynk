@@ -12,7 +12,7 @@
 
 *Centralize, organize e lance todas as suas ferramentas num único lugar — com segurança criptográfica.*
 
-[⬇️ Download Installer](../../releases/latest) · [📖 Wiki](hubsynk_wiki.html) · [🐛 Issues](../../issues) · [⭐ Releases](../../releases)
+[⬇️ Download Installer](../../releases/latest) · [📖 Wiki]([hubsynk_wiki.html](https://github.com/saulomgg/HubSynk/wiki)) · [🐛 Issues](../../issues) · [⭐ Releases](../../releases)
 
 </div>
 
